@@ -1,3 +1,6 @@
+WP Starter Theme by Vitali Lobins using underscores as a base.
+
+
 [![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)
 
 _s
