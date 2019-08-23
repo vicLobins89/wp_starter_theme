@@ -33,3 +33,13 @@ a {
     text-decoration: underline;
   }
 }
+
+/**
+ * Basic styles for links
+ */
+ img {
+   @include when-inside('.site-main') {
+     max-width: 100%;
+     height: auto;
+   }
+ }

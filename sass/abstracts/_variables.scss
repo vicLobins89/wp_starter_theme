@@ -24,7 +24,7 @@ $text-color: rgb(34, 34, 34) !default;
 
 /// Main brand color
 /// @type Color
-$brand-color: rgb(229, 0, 80) !default;
+$brand-color: rgb(221, 30, 30) !default;
 
 /// Light grey
 /// @type Color
@@ -54,9 +54,11 @@ $max-width: 1180px !default;
 /// @prop {String} keys - Keys are identifiers mapped to a given length
 /// @prop {Map} values - Values are actual breakpoints expressed in pixels
 $breakpoints: (
-  'small': 320px,
-  'medium': 768px,
-  'large': 1024px,
+  'tiny': ( max-width: 360px ),
+  'small': ( max-width:  767px ),
+  'medium': ( min-width:  768px ),
+  'large': ( min-width:  1030px ),
+  'huge': ( min-width: 1240px )
 ) !default;
 
 

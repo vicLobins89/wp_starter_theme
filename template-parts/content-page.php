@@ -6,7 +6,7 @@
  *
  * @package WP_Starter_Theme
  */
-
+require_once(get_template_directory() . '/inc/class-acf.php');
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -16,16 +16,27 @@
 
 	<?php wp_starter_theme_post_thumbnail(); ?>
 
-	<div class="entry-content">
-		<?php
-		the_content();
-
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wp_starter_theme' ),
-			'after'  => '</div>',
-		) );
+	<?php
+	$thecontent = get_the_content();
+	if( !empty($thecontent) ) :
 		?>
-	</div><!-- .entry-content -->
+		<div class="entry-content">
+			<section class="clearfix">
+			<?php
+			the_content(); ?>
+			</section>
+			<?php
+
+			WP_Starter_Theme\CustomACF\acf::render_content();
+
+			wp_link_pages( array(
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wp_starter_theme' ),
+				'after'  => '</div>',
+			) );
+			?>
+		</div><!-- .entry-content -->
+		<?php
+	endif; ?>
 
 	<?php if ( get_edit_post_link() ) : ?>
 		<footer class="entry-footer">

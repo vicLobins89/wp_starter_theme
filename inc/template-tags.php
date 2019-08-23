@@ -127,7 +127,7 @@ if ( ! function_exists( 'wp_starter_theme_post_thumbnail' ) ) :
 			?>
 
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail(); ?>
+				<?php the_post_thumbnail('full'); ?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>

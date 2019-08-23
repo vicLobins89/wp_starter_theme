@@ -1,3 +1,83 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
+
+.menu-toggle {
+    display: none;
+    @include when-inside('.is-mobile') {
+        display: block;
+    }
+    @include respond-to(small) {
+        display: block;
+    }
+}
+
+// Pseudo arrows for expand/contract
+%expand-arrow {
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        background: #000;
+        width: 16px;
+        height: 3px;
+        top: 18px;
+        right: 8px;
+        @include transition(transform 0.2s ease-in-out);
+    }
+
+    &:before {
+        transform: rotate(45deg);
+    }
+
+    &:after {
+        transform: rotate(-45deg) translate(7px, 7px);
+    }
+
+    &.active {
+        &:before {
+            transform: rotate(-45deg);
+        }
+
+        &:after {
+            transform: rotate(45deg) translate(7px, -7px);
+        }
+    }
+}
+
+// Button styles
+%btn {
+	position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    border: 5px solid #000;
+    background-color: transparent;
+    border-radius: 0;
+    font-size: 2rem;
+    line-height: 1;
+    padding: .75em 1em;
+    margin: 1rem 0;
+    cursor: pointer;
+    text-align: center;
+    clear: both;
+    outline: none;
+	@include transition(all 0.2s ease-in-out);
+
+	@include on-event {
+		color: $brand-color;
+	}
+}
+
+.primary-btn, a.primary-btn {
+	@extend %btn;
+	background-color: #fff;
+	border-color: #fff;
+	color: $text-color;
+
+	@include on-event {
+		background-color: transparent;
+		color: #fff;
+    }
+}

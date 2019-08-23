@@ -35,3 +35,21 @@ function wp_starter_theme_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'wp_starter_theme_pingback_header' );
+
+
+/**
+ * Adding custom thumbnail sizes
+ */
+// Thumbnail sizes
+add_image_size( 'folio-portrait', 600, 800, true );
+add_image_size( 'folio-thumb', 420, 300, true );
+add_image_size( 'square', 500, 500, true );
+
+function wp_starter_theme_custom_image_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+        'folio-portrait' => __('600px by 800px'),
+        'folio-thumb' => __('420px by 300px'),
+        'square' => __('500px Square'),
+    ) );
+}
+add_filter( 'image_size_names_choose', 'wp_starter_theme_custom_image_sizes' );

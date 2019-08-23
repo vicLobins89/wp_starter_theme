@@ -22,7 +22,7 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wp_starter_theme' ); ?></a>
+	<a class="skip-link screen-reader-text visually-hidden" href="#content"><?php esc_html_e( 'Skip to content', 'wp_starter_theme' ); ?></a>
 
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
@@ -36,12 +36,7 @@
 				?>
 				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 				<?php
-			endif;
-			$wp_starter_theme_description = get_bloginfo( 'description', 'display' );
-			if ( $wp_starter_theme_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $wp_starter_theme_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
+			endif; ?>
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="main-navigation">
