@@ -124,6 +124,7 @@ if ( ! function_exists( 'wp_starter_theme_post_thumbnail' ) ) :
 		}
 
 		if ( is_singular() ) :
+		ob_start();
 			?>
 
 			<div class="post-thumbnail">
@@ -132,17 +133,20 @@ if ( ! function_exists( 'wp_starter_theme_post_thumbnail' ) ) :
 
 		<?php else : ?>
 
-		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-			<?php
-			the_post_thumbnail( 'post-thumbnail', array(
-				'alt' => the_title_attribute( array(
-					'echo' => false,
-				) ),
-			) );
-			?>
-		</a>
+			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+				<?php
+				the_post_thumbnail( 'post-thumbnail', array(
+					'alt' => the_title_attribute( array(
+						'echo' => false,
+					) ),
+				) );
+				?>
+			</a>
 
 		<?php
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
 		endif; // End is_singular().
 	}
 endif;

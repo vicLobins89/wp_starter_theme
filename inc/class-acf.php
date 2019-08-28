@@ -8,15 +8,84 @@
 namespace WP_Starter_Theme\CustomACF;
 
 class acf {
-    static function render_content() {
+    private static function get_classes($container){
+        $all_classes = array();
+        
+        // Pushing layout values to classes array
+        $layout = $container['layout'];
+        if( $layout ) {
+            array_push($all_classes, $layout);
+        }
+        
+         // Pushing classes to array
+        $custom_class = $container['class'];
+        if( $custom_class ) {
+            array_push($all_classes, $custom_class);
+        }
+
+        return $all_classes;
+    }
+
+    public static function render_content() {
+        $all_styles = array();
+        $styles = '';
+        $classes = '';
+
         // check if the flexible content field has rows of data
         if( have_rows('page_content') ):
         // loop through the rows of data
         while ( have_rows('page_content') ) : the_row();
 
-            if( get_row_layout() == 'content' ) : ?>
-                <section class="clearfix">
-                <?php
+            if( get_row_layout() == 'content' ) : 
+                ob_start();
+                $container = get_sub_field('container');
+                $all_classes = acf::get_classes($container);
+
+                // Getting BG fields and pushing to classes/styles array
+                $background = get_sub_field('background');
+                $bg_color = $background['bg_color'];
+                $bg_image = $background['bg_image'];
+                if( $bg_color ) {
+                    array_push($all_classes, "bg-colour");
+                    array_push($all_styles, "background-color: $bg_color;");
+                }
+                if( $bg_image ) {
+                    array_push($all_styles, "background-image: url('$bg_image');");
+                    array_push($all_styles, "background-repeat: no-repeat;");
+                    array_push($all_styles, "background-size: cover;");
+                    array_push($all_styles, "background-position: center;");
+                }
+
+                // Getting Padding fields and pushing to styles array
+                $padding = get_sub_field('padding');
+                if( $padding ) {
+                    if( $padding['padding_top'] ) { array_push($all_styles, "padding-top: $padding[padding_top];"); }
+                    if( $padding['padding_right'] ) { array_push($all_styles, "padding-right: $padding[padding_right];"); }
+                    if( $padding['padding_bottom'] ) { array_push($all_styles, "padding-bottom: $padding[padding_bottom];"); }
+                    if( $padding['padding_left'] ) { array_push($all_styles, "padding-left: $padding[padding_left];"); }
+                }
+
+                // Creating ID var to echo
+                $custom_id = '';
+                if( $container['id'] ) {
+                    $custom_id = ' id="'.$container['id'].'"';
+                }
+
+                // Creating classes var to echo
+                if( isset($all_classes) && !empty($all_classes) ) {
+                    $classes = implode(" ", $all_classes);
+                }
+
+                // Creating styles var to echo
+                if( isset($all_styles) && !empty($all_styles) ) {
+                    $styles = ' style="';
+                    $styles .= implode(" ", $all_styles);
+                    $styles .= '"';
+                }
+
+                echo '<section '.$custom_id.' class="row row__custom-content '.$classes.'"'.$styles.'>
+                <div class="clearfix">';
+
                 $columns = array();
                 if( get_sub_field('col_1') ) {
                     array_push($columns, 'col_1');
@@ -39,19 +108,40 @@ class acf {
                         $width_subfield = $column . '_w';
                         $col_width = '';
                         if( get_sub_field($width_subfield) ) {
-                            $col_width = 'style="width:'.get_sub_field($width_subfield).'%  "';
+                            $col_width = 'style="width:'.get_sub_field($width_subfield).'%"';
                         }
                         // Display columns
                         echo '<div '.$col_width.' class="col-'.(12/$col_num).'">' . get_sub_field($column) . '</div>';
                     }
-                } ?>
-                </section>
-                <?php
+                }
+
+                echo '</div>
+                </section>';
+                $content = ob_get_contents();
+                ob_end_clean();
+                echo $content;
             // end custom content
-            elseif(get_row_layout() == 'gallery'):
+
+            elseif( get_row_layout() == 'gallery' ) :
+                ob_start();
                 $images = get_sub_field('gallery');
+                $container = get_sub_field('container');
+                $all_classes = acf::get_classes($container);
+
+                // Creating ID var to echo
+                $custom_id = '';
+                if( $container['id'] ) {
+                    $custom_id = ' id="'.$container['id'].'"';
+                }
+
+                // Creating classes var to echo
+                if( isset($all_classes) && !empty($all_classes) ) {
+                    $classes = implode(" ", $all_classes);
+                }
+
                 if( $images ): ?>
-                <section class="clearfix">
+                <?php echo '<section '.$custom_id.' class="row row__gallery '.$classes.'">'; ?>
+                <div class="clearfix">
                     <ul>
                         <?php foreach( $images as $image ): ?>
                         <li>
@@ -59,13 +149,33 @@ class acf {
                         </li>
                         <?php endforeach; ?>
                     </ul>
+                </div>
                 </section>
-                <?php endif;
+                <?php 
+                $content = ob_get_contents();
+                ob_end_clean();
+                echo $content;
+                endif;
             // end gallery
-            elseif(get_row_layout() == 'blog_feed'):
+
+            elseif( get_row_layout() == 'blog_feed' ) :
+                ob_start();
                 $all_cats = get_sub_field('all_categories');
                 $post_category = get_sub_field('category');
                 $post_num = get_sub_field('post_count');
+                $container = get_sub_field('container');
+                $all_classes = acf::get_classes($container);
+
+                // Creating ID var to echo
+                $custom_id = '';
+                if( $container['id'] ) {
+                    $custom_id = ' id="'.$container['id'].'"';
+                }
+
+                // Creating classes var to echo
+                if( isset($all_classes) && !empty($all_classes) ) {
+                    $classes = implode(" ", $all_classes);
+                }
 
                 // Setup args for either all categories or selected in sub field
                 global $post;
@@ -87,11 +197,14 @@ class acf {
                 
                 // Display blog feed
                 if ( $arr_posts->have_posts() ) : ?>
-                    <section class="clearfix">
+                    <?php echo '<section '.$custom_id.' class="row row__blog-feed '.$classes.'">'; ?>
+                    <div class="clearfix">
                     <?php while ( $arr_posts->have_posts() ) :
                         $arr_posts->the_post(); ?>
                         <div id="post-<?php the_ID(); ?>" class="col-<?php echo (12/$post_num); ?> cf">
+                            <?php if( get_the_post_thumbnail() ) : ?>
                             <a href="<?php the_permalink(); ?>" class="thumb"><?php the_post_thumbnail('square'); ?></a>
+                            <?php endif; ?>
                             <div class="text">
                                 <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                                 <p class="excerpt"><?php the_excerpt(); ?></p>
@@ -99,11 +212,16 @@ class acf {
                             </div>
                         </div>
                     <?php endwhile; ?>
+                    </div>
                     </section>
                 <?php endif;
+                $content = ob_get_contents();
+                ob_end_clean();
+                echo $content;
                 wp_reset_postdata();
-
-            endif;
+                // end blog feed
+                
+            endif; // end page_content if
         endwhile; // end page_content loop
         else :
         // no layouts found
