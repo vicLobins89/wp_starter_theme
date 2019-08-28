@@ -6,31 +6,26 @@
  *
  * @package WP_Starter_Theme
  */
-require_once(get_template_directory() . '/inc/class-acf.php');
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	$thecontent = get_the_content();
-	if( has_post_thumbnail() ) : ?>
-		<header class="entry-header">
-			<?php wp_starter_theme_post_thumbnail(); ?>
+	if( !empty($thecontent) || has_post_thumbnail() ) : ?>
+		<header class="entry-header row row__header<?php echo ' '.get_field('layout'); ?>">
+			<?php if( has_post_thumbnail() ) : wp_starter_theme_post_thumbnail(); endif; // .post-thumbnail
+
+			if( !empty($thecontent) ) : ?>
+			<div class="header-content clearfix">
+				<?php the_content(); ?>
+			</div>
+			<?php
+			endif; ?><!-- .header-content -->
 		</header><!-- .entry-header -->
 		<?php
 	endif; ?>
 	
 	<div class="entry-content">
-	<?php
-	if( !empty($thecontent) ) :
-		?>
-		<section class="row row__main-content <?php echo get_field('layout'); ?>">
-		<div class="clearfix">
-			<?php the_content(); ?>
-		</div>
-		</section>
-	<?php
-	endif; ?>
-
 	<?php
 	WP_Starter_Theme\CustomACF\acf::render_content();
 

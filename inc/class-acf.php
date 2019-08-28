@@ -8,6 +8,20 @@
 namespace WP_Starter_Theme\CustomACF;
 
 class acf {
+    public static function render_options_page(){
+        if( function_exists('acf_add_options_page') ) {
+	
+            acf_add_options_page(array(
+                'page_title' 	=> 'Theme General Settings',
+                'menu_title'	=> 'Theme Settings',
+                'menu_slug' 	=> 'theme-general-settings',
+                'position'      => '28.35',
+                'capability'	=> 'edit_posts',
+                'redirect'		=> false
+            ));
+        }
+    }
+
     private static function get_classes($container){
         $all_classes = array();
         
@@ -199,19 +213,21 @@ class acf {
                 if ( $arr_posts->have_posts() ) : ?>
                     <?php echo '<section '.$custom_id.' class="row row__blog-feed '.$classes.'">'; ?>
                     <div class="clearfix">
-                    <?php while ( $arr_posts->have_posts() ) :
-                        $arr_posts->the_post(); ?>
-                        <div id="post-<?php the_ID(); ?>" class="col-<?php echo (12/$post_num); ?> cf">
-                            <?php if( get_the_post_thumbnail() ) : ?>
-                            <a href="<?php the_permalink(); ?>" class="thumb"><?php the_post_thumbnail('square'); ?></a>
-                            <?php endif; ?>
-                            <div class="text">
-                                <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                <p class="excerpt"><?php the_excerpt(); ?></p>
-                                <a class="read-more" href="<?php the_permalink(); ?>">Read More</a>
+                        <?php 
+                        while ( $arr_posts->have_posts() ) :
+                            $arr_posts->the_post(); ?>
+                            <div id="post-<?php the_ID(); ?>" class="col-<?php echo (12/$post_num); ?> cf">
+                                <?php if( get_the_post_thumbnail() ) : ?>
+                                <a href="<?php the_permalink(); ?>" class="thumb"><?php the_post_thumbnail('square'); ?></a>
+                                <?php endif; ?>
+                                <div class="text">
+                                    <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                    <p class="excerpt"><?php the_excerpt(); ?></p>
+                                    <a class="read-more" href="<?php the_permalink(); ?>">Read More</a>
+                                </div>
                             </div>
-                        </div>
-                    <?php endwhile; ?>
+                            <?php
+                        endwhile; ?>
                     </div>
                     </section>
                 <?php endif;

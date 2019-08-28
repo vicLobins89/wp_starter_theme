@@ -27,16 +27,17 @@
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
 			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
+			if( get_field('logo', 'option') ) :
+				$logo = get_field('logo', 'option');
+				echo '<a class="logo" href="'.esc_url( home_url( '/' ) ).'" rel="home"><img src="'.$logo['url'].'" alt="'.$logo['alt'].'"></a>';
+			elseif( get_custom_logo() ) :
+				the_custom_logo();
+			else : 
 				?>
 				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif; ?>
+				<?php 
+			endif;
+			?>
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="main-navigation">
