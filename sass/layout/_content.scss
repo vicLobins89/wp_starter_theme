@@ -1,0 +1,27 @@
+// -----------------------------------------------------------------------------
+// This file contains main content styles
+// -----------------------------------------------------------------------------
+
+ /**
+ * Page rows
+ */
+
+ .row {
+   &.default {
+     @extend .container;
+   }
+
+   &.full {
+     max-width: none;
+     width: 100%;
+   }
+
+   &.wrap {
+    @extend .container;
+    max-width: $max-width * .666;
+   }
+
+   &.hide {
+     display: none !important;
+   }
+ }

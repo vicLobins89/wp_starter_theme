@@ -25,7 +25,11 @@
 		return;
 	}
 
-	menu.setAttribute( 'aria-expanded', 'false' );
+	if( document.documentElement.clientWidth < 768 ) {
+		menu.setAttribute( 'aria-expanded', 'false' );
+		button.setAttribute( 'aria-expanded', 'false' );
+	}
+	
 	if ( -1 === menu.className.indexOf( 'nav-menu' ) ) {
 		menu.className += ' nav-menu';
 	}

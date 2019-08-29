@@ -15,7 +15,11 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
-			
+			<?php
+			if( get_field('copyright', 'option') ) : ?>
+			<p class="copyright"><?php echo get_field('copyright', 'option'); ?></p>
+			<?php
+			endif; ?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
