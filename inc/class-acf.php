@@ -8,6 +8,9 @@
 namespace WP_Starter_Theme\CustomACF;
 
 class acf {
+    /**
+     * Render theme settings page
+     */
     public static function render_options_page(){
         if( function_exists('acf_add_options_page') ) {
 	
@@ -22,6 +25,9 @@ class acf {
         }
     }
 
+    /**
+     * Helper function to create a classes array for use in flexible content ACF fields
+     */
     private static function get_classes($container){
         $all_classes = array();
         
@@ -40,6 +46,9 @@ class acf {
         return $all_classes;
     }
 
+    /**
+     * Render flexi content ACF fields for use in template files
+     */
     public static function render_content() {
         $all_styles = array();
         $styles = '';

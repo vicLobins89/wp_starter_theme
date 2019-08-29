@@ -45,9 +45,15 @@ if ( ! function_exists( 'wp_starter_theme_setup' ) ) :
 		// default thumb size
 		set_post_thumbnail_size(125, 125, true);
 
-		// This theme uses wp_nav_menu() in one location.
+		// This theme uses wp_nav_menu()
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'wp_starter_theme' ),
+		) );
+		register_nav_menus( array(
+			'menu-2' => esc_html__( 'Secondary', 'wp_starter_theme' ),
+		) );
+		register_nav_menus( array(
+			'menu-3' => esc_html__( 'Footer', 'wp_starter_theme' ),
 		) );
 
 		/*
@@ -113,8 +119,8 @@ function wp_starter_theme_widgets_init() {
 		'description'   => esc_html__( 'Add widgets here.', 'wp_starter_theme' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'before_title'  => '<h4 class="widget-title">',
+		'after_title'   => '</h4>',
 	) );
 }
 add_action( 'widgets_init', 'wp_starter_theme_widgets_init' );
@@ -134,11 +140,6 @@ function wp_starter_theme_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'wp_starter_theme_scripts' );
-
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.
