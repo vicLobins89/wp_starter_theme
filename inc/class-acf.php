@@ -131,7 +131,7 @@ class acf {
                         $width_subfield = $column . '_w';
                         $col_width = '';
                         if( get_sub_field($width_subfield) ) {
-                            $col_width = 'style="width:'.get_sub_field($width_subfield).'%"';
+                            $col_width = 'data-width="'.get_sub_field($width_subfield).'%"';
                         }
                         // Display columns
                         echo '<div '.$col_width.' class="col-'.(12/$col_num).'">' . get_sub_field($column) . '</div>';

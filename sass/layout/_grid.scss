@@ -25,7 +25,7 @@
         }
     }
 
-    @include respond-to('tiny') {
+    @include respond-to('small') {
         width: 100%;
         float: none;
     }

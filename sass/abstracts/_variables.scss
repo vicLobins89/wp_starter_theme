@@ -2,10 +2,6 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
-
-
-
-
 /// Regular font family
 /// @type List
 $text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
@@ -13,8 +9,6 @@ $text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvet
 /// Code (monospace) font family
 /// @type List
 $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
-
-
 
 
 
@@ -40,13 +34,9 @@ $dark-grey: rgb(68, 68, 68) !default;
 
 
 
-
-
 /// Container's maximum width
 /// @type Length
 $max-width: 1180px !default;
-
-
 
 
 
@@ -60,9 +50,6 @@ $breakpoints: (
   'large': ( min-width:  1030px ),
   'huge': ( min-width: 1240px )
 ) !default;
-
-
-
 
 
 
