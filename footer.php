@@ -16,10 +16,13 @@
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
 			<?php
-			if( get_field('copyright', 'option') ) : ?>
-			<p class="copyright"><?php echo get_field('copyright', 'option'); ?></p>
-			<?php
-			endif; ?>
+			// Get ACF copyright field or fallback to site name and year
+			if( get_field('copyright', 'option') ) {
+				echo '<p class="copyright">'.get_field('copyright', 'option').'</p>';
+			} else {
+				echo '<p class="copyright">@ Copyright ' . get_bloginfo() . ' ' . date('Y').'</p>';
+			}
+			?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

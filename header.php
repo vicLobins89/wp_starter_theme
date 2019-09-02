@@ -27,6 +27,7 @@
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
 			<?php
+			// Get ACF Theme options logo or Customizer logo. If not set use site name
 			if( get_field('logo', 'option') ) :
 				$logo = get_field('logo', 'option');
 				echo '<a class="logo" href="'.esc_url( home_url( '/' ) ).'" rel="home"><img src="'.$logo['url'].'" alt="'.$logo['alt'].'"></a>';
@@ -49,6 +50,8 @@
 			) );
 			?>
 		</nav><!-- #site-navigation -->
+
+		<?php WP_Starter_Theme\CustomACF\acf::render_social_media(); ?>
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

@@ -24,6 +24,26 @@ class acf {
             ));
         }
     }
+    
+    /**
+     * Render social media links
+     */
+    public static function render_social_media(){
+        if( have_rows('social_media', 'option') ) : ?>
+            <div class="social-links">
+
+            <?php
+            while( have_rows('social_media', 'option') ): the_row(); ?>
+
+                <a href="<?php the_sub_field('link'); ?>" target="_blank"><?php the_sub_field('icon'); ?></a>
+
+            <?php
+            endwhile; ?>
+
+            </div>
+            <?php
+        endif; // end social media row
+    }
 
     /**
      * Helper function to create a classes array for use in flexible content ACF fields

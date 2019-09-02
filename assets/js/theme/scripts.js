@@ -23,7 +23,7 @@
 	}
 
 	/*
-	* Add/remove ACF column widths from data-width attr
+	* Add/remove ACF column widths from data-width attribute
 	*/
 	function adjustColumnWidths(){
 		viewport = updateViewportDimensions();
