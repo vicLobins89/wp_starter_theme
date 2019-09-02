@@ -167,6 +167,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  * Adding Custom ACF Class
  */
 require_once(get_template_directory() . '/inc/class-acf.php');
+use WP_Starter_Theme\Custom_ACF;
 
 // Theme settings page
-WP_Starter_Theme\CustomACF\acf::render_options_page();
+Custom_ACF::render_options_page();

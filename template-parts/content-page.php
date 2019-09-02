@@ -6,6 +6,9 @@
  *
  * @package WP_Starter_Theme
  */
+
+use WP_Starter_Theme\Custom_ACF;
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -27,7 +30,7 @@
 	
 	<div class="entry-content">
 	<?php
-	WP_Starter_Theme\CustomACF\acf::render_content();
+	Custom_ACF::render_content();
 
 	wp_link_pages( array(
 		'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wp_starter_theme' ),

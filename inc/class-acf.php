@@ -5,9 +5,9 @@
  * @package WP_Starter_Theme
  */
 
-namespace WP_Starter_Theme\CustomACF;
+namespace WP_Starter_Theme;
 
-class acf {
+class Custom_ACF {
     /**
      * Render theme settings page
      */
@@ -82,7 +82,7 @@ class acf {
             if( get_row_layout() == 'content' ) : 
                 ob_start();
                 $container = get_sub_field('container');
-                $all_classes = acf::get_classes($container);
+                $all_classes = Custom_ACF::get_classes($container);
 
                 // Getting BG fields and pushing to classes/styles array
                 $background = get_sub_field('background');
@@ -169,7 +169,7 @@ class acf {
                 ob_start();
                 $images = get_sub_field('gallery');
                 $container = get_sub_field('container');
-                $all_classes = acf::get_classes($container);
+                $all_classes = Custom_ACF::get_classes($container);
 
                 // Creating ID var to echo
                 $custom_id = '';
@@ -207,7 +207,7 @@ class acf {
                 $post_category = get_sub_field('category');
                 $post_num = get_sub_field('post_count');
                 $container = get_sub_field('container');
-                $all_classes = acf::get_classes($container);
+                $all_classes = Custom_ACF::get_classes($container);
 
                 // Creating ID var to echo
                 $custom_id = '';

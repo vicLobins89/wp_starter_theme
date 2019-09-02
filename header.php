@@ -9,6 +9,8 @@
  * @package WP_Starter_Theme
  */
 
+use WP_Starter_Theme\Custom_ACF;
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -16,6 +18,12 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+
+	<?php // favicons ?>
+	<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon.png">
+	<!--[if IE]>
+		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/favicon.ico">
+	<![endif]-->
 
 	<?php wp_head(); ?>
 </head>
@@ -51,7 +59,7 @@
 			?>
 		</nav><!-- #site-navigation -->
 
-		<?php WP_Starter_Theme\CustomACF\acf::render_social_media(); ?>
+		<?php Custom_ACF::render_social_media(); ?>
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">
