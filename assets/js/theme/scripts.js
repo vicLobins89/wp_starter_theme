@@ -42,6 +42,6 @@
 	adjustColumnWidths();
 
 	window.onresize = function(){
-		adjustColumnWidths();s
+		adjustColumnWidths();
 	};
 } )();
