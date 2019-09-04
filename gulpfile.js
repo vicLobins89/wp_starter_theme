@@ -25,7 +25,7 @@ gulp.task('images', function(){
 
 // Concat and minify for JS
 gulp.task('scripts', function(){
-    return gulp.src('assets/js/theme/*.js')
+    return gulp.src(['assets/js/theme/*.js', '!assets/js/theme/ajax-loader.js'])
         .pipe(concat('main.min.js'))
         .pipe(gulpIf('*.js', uglify()))
         .pipe(gulp.dest('assets/js'));

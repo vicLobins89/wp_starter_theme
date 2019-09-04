@@ -124,7 +124,6 @@ if ( ! function_exists( 'wp_starter_theme_post_thumbnail' ) ) :
 		}
 
 		if ( is_singular() ) :
-		ob_start();
 			?>
 
 			<div class="post-thumbnail">
@@ -144,9 +143,27 @@ if ( ! function_exists( 'wp_starter_theme_post_thumbnail' ) ) :
 			</a>
 
 		<?php
-		$content = ob_get_contents();
-		ob_end_clean();
-		return $content;
 		endif; // End is_singular().
+	}
+endif;
+
+if ( ! function_exists( 'wp_starter_theme_the_posts_navigation' ) ) :
+	/**
+	 * Displays numbered pagination
+	 */
+	function wp_starter_theme_the_posts_navigation() {
+		the_posts_pagination(
+			array(
+				'mid_size'  => 2,
+				'prev_text' => sprintf(
+					'<span class="nav-prev-text">%s</span>',
+					__( 'Newer posts', 'wp_starter_theme' )
+				),
+				'next_text' => sprintf(
+					'<span class="nav-next-text">%s</span>',
+					__( 'Older posts', 'wp_starter_theme' )
+				),
+			)
+		);
 	}
 endif;

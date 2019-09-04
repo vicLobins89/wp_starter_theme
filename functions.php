@@ -166,8 +166,15 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 /**
  * Adding Custom ACF Class
  */
-require_once(get_template_directory() . '/inc/class-acf.php');
+require get_template_directory() . '/inc/class-acf.php';
 use WP_Starter_Theme\Custom_ACF;
 
 // Theme settings page
 Custom_ACF::render_options_page();
+
+/**
+ * Adding AJAX loading for posts if enabled
+ */
+if( get_field('ajaxify', 'option') ) {
+	require get_template_directory() . '/inc/ajax-loader.php';
+}
