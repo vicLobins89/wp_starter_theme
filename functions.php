@@ -176,5 +176,21 @@ Custom_ACF::render_options_page();
  * Adding AJAX loading for posts if enabled
  */
 if( get_field('ajaxify', 'option') ) {
-	require get_template_directory() . '/inc/ajax-loader.php';
+	require get_template_directory() . '/inc/class-ajax-loader.php';
 }
+
+/**
+ * Adding Custom Post Types
+ */
+require get_template_directory() . '/inc/class-custom-post-types.php';
+use WP_Starter_Theme\Custom_Post_Type;
+
+// Set slug overwrite args for post type
+$case_study_args = array(
+	'rewrite' => array( 'slug' => 'case-studies', 'with_front' => false ),
+	'has_archive' => 'case-studies',
+);
+
+// Initialise class
+$case_study = new Custom_Post_Type( 'Project', $case_study_args );
+$case_study->add_taxonomy( 'case-studies' );

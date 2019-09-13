@@ -145,7 +145,7 @@ class Custom_ACF {
 
                 // Loop over columns to create even sized divs
                 $col_num = count(array_filter($columns));
-                foreach($columns as $key => $column) {
+                foreach($columns as $column) {
                     if( $column ) {
                         // Setup width sub field for each column
                         $width_subfield = $column . '_w';
@@ -244,18 +244,8 @@ class Custom_ACF {
                     <div class="clearfix">
                         <?php 
                         while ( $arr_posts->have_posts() ) :
-                            $arr_posts->the_post(); ?>
-                            <div id="post-<?php the_ID(); ?>" class="col-<?php echo (12/$post_num); ?> cf">
-                                <?php if( get_the_post_thumbnail() ) : ?>
-                                <a href="<?php the_permalink(); ?>" class="thumb"><?php the_post_thumbnail('square'); ?></a>
-                                <?php endif; ?>
-                                <div class="text">
-                                    <h3 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                                    <p class="excerpt"><?php the_excerpt(); ?></p>
-                                    <a class="read-more" href="<?php the_permalink(); ?>">Read More</a>
-                                </div>
-                            </div>
-                            <?php
+                            $arr_posts->the_post(); 
+                            get_template_part( 'template-parts/content', 'post' );
                         endwhile; ?>
                     </div>
                     </section>

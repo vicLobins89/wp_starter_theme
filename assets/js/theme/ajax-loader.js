@@ -37,6 +37,10 @@ jQuery(function($){
     /**
      * Categories filter
      */
+    $('input.post-filter').on('change', function() {
+        $(this).closest("#filter").submit();
+    });
+
     $('#filter').submit(function(){
         var $filter = $('#filter');
 
@@ -45,11 +49,16 @@ jQuery(function($){
             data : $filter.serialize(), //form data
             dataType : 'json',
             type : 'POST',
-            beforeSend : function(){
-                // Change button label
-                $filter.find('button').text('Processing...');
-            },
             success : function(data){
+                // Add URL parameter
+                var plain_url = window.location.href.split('?')[0];
+                console.log(data.post_type);
+                if( data.category !== null ) {
+                    window.history.replaceState( {} , '', plain_url+'?query='+data.post_type+'&filter='+data.category );
+                } else {
+                    window.history.replaceState( {} , '', plain_url+'?query='+data.post_type );
+                }
+
                 // when filter applied set the current page to 1
                 wp_starter_theme_params.current_page = 1;
                 
@@ -58,9 +67,6 @@ jQuery(function($){
 
                 // new max page param
                 wp_starter_theme_params.max_page = data.max_page;
-
-                // Change the button label back               
-                $filter.find('button').text('Apply filter');
 
                 // Insert posts
                 $('.posts-container').html(data.content);

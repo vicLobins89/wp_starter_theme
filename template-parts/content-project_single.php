@@ -9,7 +9,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('col-4'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<?php
 		if ( is_singular() ) :
@@ -33,7 +33,7 @@
 
 	<div class="entry-content">
 		<?php
-		the_excerpt();
+		the_content();
 		?>
 	</div><!-- .entry-content -->
 
