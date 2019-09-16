@@ -2,17 +2,13 @@
 /**
  * The main template file
  *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package WP_Starter_Theme
  */
 
 use WP_Starter_Theme\Ajax_Loader;
+use WP_Starter_Theme\Tags as Tags;
 
 get_header();
 ?>
@@ -56,7 +52,7 @@ get_header();
 			if( get_field('ajaxify', 'option') && $wp_query->max_num_pages > 1 ) {
 				echo '<div class="primary-btn load-more">More posts</div>';
 			} else {
-				wp_starter_theme_the_posts_navigation();
+				Tags\the_posts_navigation();
 			}
 
 		else :

@@ -7,6 +7,8 @@
  * @package WP_Starter_Theme
  */
 
+use WP_Starter_Theme\Tags As Tags;
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -22,14 +24,14 @@
 			?>
 			<div class="entry-meta">
 				<?php
-				wp_starter_theme_posted_on();
-				wp_starter_theme_posted_by();
+				Tags\posted_on();
+				Tags\posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php wp_starter_theme_post_thumbnail(); ?>
+	<?php Tags\post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -38,6 +40,6 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php wp_starter_theme_entry_footer(); ?>
+		<?php Tags\entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

@@ -8,6 +8,7 @@
  */
 
 use WP_Starter_Theme\Ajax_Loader;
+use WP_Starter_Theme\Tags as Tags;
 
 get_header();
 ?>
@@ -50,7 +51,7 @@ get_header();
 			if( get_field('ajaxify', 'option') && $wp_query->max_num_pages > 1 ) {
 				echo '<div class="primary-btn load-more">More posts</div>';
 			} else {
-				wp_starter_theme_the_posts_navigation();
+				Tags\the_posts_navigation();
 			}
 
 		else :

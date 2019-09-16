@@ -8,6 +8,7 @@
  */
 
 use WP_Starter_Theme\Custom_ACF;
+use WP_Starter_Theme\Tags as Tags;
 
 ?>
 
@@ -16,7 +17,7 @@ use WP_Starter_Theme\Custom_ACF;
 	$thecontent = get_the_content();
 	if( !empty($thecontent) || has_post_thumbnail() ) : ?>
 		<header class="entry-header row row__header<?php echo ' '.get_field('layout'); ?>">
-			<?php if( has_post_thumbnail() ) : wp_starter_theme_post_thumbnail(); endif; // .post-thumbnail
+			<?php if( has_post_thumbnail() ) : Tags\post_thumbnail(); endif; // .post-thumbnail
 
 			if( !empty($thecontent) ) : ?>
 			<div class="header-content clearfix">

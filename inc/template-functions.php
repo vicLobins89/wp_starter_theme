@@ -5,13 +5,15 @@
  * @package WP_Starter_Theme
  */
 
+namespace WP_Starter_Theme\Helpers;
+
 /**
  * Adds custom classes to the array of body classes.
  *
  * @param array $classes Classes for the body element.
  * @return array
  */
-function wp_starter_theme_body_classes( $classes ) {
+function body_classes( $classes ) {
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
@@ -24,17 +26,17 @@ function wp_starter_theme_body_classes( $classes ) {
 
 	return $classes;
 }
-add_filter( 'body_class', 'wp_starter_theme_body_classes' );
+add_filter( 'body_class', __NAMESPACE__ . '\body_classes' );
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
-function wp_starter_theme_pingback_header() {
+function pingback_header() {
 	if ( is_singular() && pings_open() ) {
 		printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
 	}
 }
-add_action( 'wp_head', 'wp_starter_theme_pingback_header' );
+add_action( 'wp_head', __NAMESPACE__ . '\\pingback_header' );
 
 
 /**
@@ -45,11 +47,11 @@ add_image_size( 'folio-portrait', 600, 800, true );
 add_image_size( 'folio-thumb', 420, 300, true );
 add_image_size( 'square', 500, 500, true );
 
-function wp_starter_theme_custom_image_sizes( $sizes ) {
+function custom_image_sizes( $sizes ) {
     return array_merge( $sizes, array(
         'folio-portrait' => __('600px by 800px'),
         'folio-thumb' => __('420px by 300px'),
         'square' => __('500px Square'),
     ) );
 }
-add_filter( 'image_size_names_choose', 'wp_starter_theme_custom_image_sizes' );
+add_filter( 'image_size_names_choose', __NAMESPACE__ . '\\custom_image_sizes' );

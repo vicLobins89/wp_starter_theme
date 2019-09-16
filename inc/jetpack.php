@@ -7,6 +7,8 @@
  * @package WP_Starter_Theme
  */
 
+namespace WP_Starter_Theme\Jetpack;
+
 /**
  * Jetpack setup function.
  *
@@ -14,11 +16,11 @@
  * See: https://jetpack.com/support/responsive-videos/
  * See: https://jetpack.com/support/content-options/
  */
-function wp_starter_theme_jetpack_setup() {
+function jetpack_setup() {
 	// Add theme support for Infinite Scroll.
 	add_theme_support( 'infinite-scroll', array(
 		'container' => 'main',
-		'render'    => 'wp_starter_theme_infinite_scroll_render',
+		'render'    => __NAMESPACE__ . '\\infinite_scroll_render',
 		'footer'    => 'page',
 	) );
 
@@ -42,12 +44,12 @@ function wp_starter_theme_jetpack_setup() {
 		),
 	) );
 }
-add_action( 'after_setup_theme', 'wp_starter_theme_jetpack_setup' );
+add_action( 'after_setup_theme', __NAMESPACE__ . '\\jetpack_setup' );
 
 /**
  * Custom render function for Infinite Scroll.
  */
-function wp_starter_theme_infinite_scroll_render() {
+function infinite_scroll_render() {
 	while ( have_posts() ) {
 		the_post();
 		if ( is_search() ) :
